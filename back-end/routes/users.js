@@ -1,63 +1,104 @@
 var express = require("express");
 var router = express.Router();
 
-const db = require("../models/user");
+const User = require("../models/user");
 
 /* Basic CRUD operations */
 
 /* GET - Get all Users. */
-router.get("/", function(req, res, next) {
-  db.findAll()
-    .then((users) => {
-      res.json(users);
-    })
-    .catch((err) => {
-      res.json(err);
+router.get("/", async (req, res, next) => {
+  try {
+    let data = await new User().fetchAll();
+    res.json(data);
+  } catch (err) {
+    res.json({
+      status: false,
+      msg: "Error while fetching users",
+      result: err,
     });
+  }
 });
 
-/* GET - Get User by ID. */
-router.get("/:id", function(req, res, next) {
-  db.findById(req.params.id)
-    .then((user) => {
-      res.json(user);
-    })
-    .catch((err) => {
-      res.json(err);
+// /* GET - Get User by ID. */
+router.get("/:id", async (req, res, next) => {
+  try {
+    let user = await new User().where("id", req.params.id).fetch();
+    res.json(user);
+  } catch (err) {
+    res.json({
+      status: false,
+      msg: "Error while fetching user",
+      result: err,
     });
+  }
 });
 
-/* POST - Add new User */
-router.post("/add", function(req, res, next) {
-  db.addUser(req.body)
-    .then((users) => {
-      res.json(users);
-    })
-    .catch((err) => {
-      res.json(err);
+/* POST - Add new User
+This will be moved to the registration part in the future so 
+I will not do any data validation for now
+*/
+router.post("/add", async (req, res, next) => {
+  try {
+    let userData = req.body;
+    let newUser = await new User().save(userData);
+    res.json({
+      status: true,
+      msg: "User successfully added",
+      result: newUser.toJSON(),
     });
+  } catch (err) {
+    res.json({
+      status: false,
+      msg: "Error while adding new user",
+      result: err,
+    });
+  }
 });
 
-/* PUT - Update User */
-router.put("/update", function(req, res, next) {
-  db.updateUser(req.body)
-    .then((user) => {
-      res.json(user);
-    })
-    .catch((err) => {
-      res.json(err);
+// /* PUT - Update User */
+router.put("/update/:id", async (req, res, next) => {
+  try {
+    if (isNaN(req.params.id)) {
+      throw new Error("Parameter is not of type number");
+    }
+    let updateUser = await new User({
+      id: req.params.id,
+    }).save(req.body);
+    res.json({
+      status: true,
+      msg: "User successfully updated",
+      result: updateUser.toJSON(),
     });
+  } catch (err) {
+    res.json({
+      status: false,
+      msg: "Error while updating user",
+      result: err,
+    });
+  }
 });
 
-/* DELETE - Delete User */
-router.delete("/delete/:id", function(req, res, next) {
-  db.deleteUser(req.params.id)
-    .then((user) => {
-      res.json(user);
-    })
-    .catch((err) => {
-      res.json(err);
+// /* DELETE - Delete User */
+router.delete("/delete/:id", async (req, res, next) => {
+  try {
+    if (isNaN(req.params.id)) {
+      throw new Error("Parameter is not of type number");
+    }
+    let deleteUser = await new User({
+      id: req.params.id,
+    }).destroy();
+    res.json({
+      status: true,
+      msg: "User successfully deleted",
+      result: deleteUser.toJSON(),
     });
+  } catch (err) {
+    res.json({
+      status: false,
+      msg: "Error while deleting user",
+      result: err,
+    });
+  }
 });
 
 module.exports = router;
