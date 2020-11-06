@@ -1,9 +1,6 @@
 var express = require("express");
 var router = express.Router();
-
 const User = require("../models/user");
-
-/* Basic CRUD operations */
 
 /* GET - Get all Users. */
 router.get("/", async (req, res, next) => {

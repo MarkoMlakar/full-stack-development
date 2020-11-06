@@ -1,7 +1,7 @@
 exports.seed = async (knex) => {
   const bcrypt = require("bcryptjs");
   const salt = await bcrypt.genSalt(10);
-  const hashPassword = await bcrypt.hash("root", salt);
+  const hashPassword = await bcrypt.hash("123456", salt);
   // Deletes ALL existing entries
   return knex("user")
     .del()
