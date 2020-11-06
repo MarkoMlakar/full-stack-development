@@ -33,28 +33,6 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-/* POST - Add new User
-This will be moved to the registration part in the future so 
-I will not do any data validation for now
-*/
-router.post("/add", async (req, res, next) => {
-  try {
-    let userData = req.body;
-    let newUser = await new User().save(userData);
-    res.json({
-      status: true,
-      msg: "User successfully added",
-      result: newUser.toJSON(),
-    });
-  } catch (err) {
-    res.json({
-      status: false,
-      msg: "Error while adding new user",
-      result: err,
-    });
-  }
-});
-
 // /* PUT - Update User */
 router.put("/update/:id", async (req, res, next) => {
   try {
