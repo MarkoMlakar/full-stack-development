@@ -1,0 +1,31 @@
+GET http://localhost:3000/api/users
+
+### LOGIN AND CREATE TOKEN
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+    "email": "root@gmail.com",
+    "password": "123456"
+
+}
+
+### REFRESH TOKEN
+POST http://localhost:3000/api/access-token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjA1NTQ1MTc1fQ.73vMkm8GQQXxiQUEFVGzFMmFNXmNXT_qVBrCRZCNDB8"
+}
+
+### INVALIDATE REFRESH TOKEN
+DELETE http://localhost:3000/api/invalidate
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA1NTMyMTcxfQ.3STAHsaCHAc1Nb4KBOg2LOyxlhdXyuRDCEM_fKQ8ghE"
+}
+
+
+### ACCESS TOKEN PROTECTED ROUTE
+GET http://localhost:3000/api

@@ -9,6 +9,7 @@
     "@hapi/joi": "^17.1.1",
     "bcryptjs": "^2.4.3",
     "bookshelf": "^1.2.0",
+    "bookshelf-uuid": "^1.0.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
@@ -17,7 +18,9 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.9",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.6",
     "pg": "^8.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }

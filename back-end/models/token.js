@@ -1,8 +1,8 @@
 const knex = require("../knex/knex");
 const bookshelf = require("bookshelf")(knex);
 
-const User = bookshelf.Model.extend({
-  tableName: "user",
+const Token = bookshelf.Model.extend({
+  tableName: "token",
 });
 
-module.exports = User;
+module.exports = Token;

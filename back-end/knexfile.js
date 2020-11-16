@@ -1,5 +1,5 @@
 const dotenv = require("dotenv");
-dotenv.config();
+dotenv.config({ path: "./.env" });
 
 module.exports = {
   development: {
@@ -11,12 +11,11 @@ module.exports = {
       database: process.env.KNEX_DATABASE,
       charset: process.env.KNEX_CHARSET,
     },
-  },
-  /* TODO: Why is this not working? */
-  migrations: {
-    directory: __dirname + "/knex/migrations",
-  },
-  seeds: {
-    directory: __dirname + "/knex/seeds",
+    migrations: {
+      directory: __dirname + "/knex/migrations",
+    },
+    seeds: {
+      directory: __dirname + "/knex/seeds",
+    },
   },
 };
