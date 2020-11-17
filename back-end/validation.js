@@ -27,5 +27,17 @@ const loginValidation = (data) => {
   return validationSchema.validate(data);
 };
 
+/* Product validation */
+const productValidation = (data) => {
+  const validationSchema = Joi.object({
+    title: Joi.string().min(2).max(30).required(),
+    description: Joi.string(),
+    price: Joi.number(),
+  });
+
+  return validationSchema.validate(data);
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
+module.exports.productValidation = productValidation;

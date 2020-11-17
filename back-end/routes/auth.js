@@ -14,10 +14,10 @@ router.post("/register", async (req, res) => {
     return res.status(400).send(error.details[0].message);
   }
 
-  let salt, hashPassword;
+  let hashPassword;
 
   try {
-    salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(10);
     hashPassword = await bcrypt.hash(req.body.password, salt);
   } catch (err) {
     res.json({
@@ -37,6 +37,7 @@ router.post("/register", async (req, res) => {
     age: req.body.age,
     gender: req.body.gender,
     profession: req.body.profession,
+    role_id: 2,
   };
 
   try {
@@ -90,6 +91,12 @@ router.post("/login", async (req, res) => {
           jwt.verify(
             rfToken.toJSON().refresh_token,
             process.env.REFRESH_TOKEN_SECRET + user.toJSON().password
+          );
+          createCookie(
+            res,
+            rfToken.toJSON().refresh_token,
+            "__rft",
+            process.env.RFT_COOKIE_EXPIRES
           );
           res.json({
             statusCode: res.status(200).statusCode,

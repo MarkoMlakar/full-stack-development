@@ -11,6 +11,7 @@ exports.up = function (knex, Promise) {
     table.integer("age").notNullable();
     table.integer("gender").notNullable();
     table.string("profession").notNullable();
+    table.integer("role_id").unsigned().references("id").inTable("role");
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table.timestamp("updated_at").defaultTo(knex.fn.now());
   });

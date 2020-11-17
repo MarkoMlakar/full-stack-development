@@ -7,6 +7,7 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var authRouter = require("./routes/auth");
+var productRouter = require("./routes/product");
 
 var app = express();
 
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api", indexRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/", authRouter);
+app.use("/api/products", productRouter);
 
 // error handler
 app.use(function (err, req, res, next) {

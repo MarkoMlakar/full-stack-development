@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 module.exports = function (req, res, next) {
   const { cookies } = req;
   const accessToken = cookies.__act;
-  if (accessToken == null) return res.status(401).send("Access Denied");
+  if (accessToken == null)
+    return res.status(401).send("Access Denied. Please sign in.");
 
   try {
     const verified_access_token = jwt.verify(
@@ -16,7 +17,7 @@ module.exports = function (req, res, next) {
   } catch (err) {
     res.json({
       statusCode: res.status(403).statusCode,
-      msg: "Invalid Token",
+      msg: "Permission denied",
     });
   }
 };
