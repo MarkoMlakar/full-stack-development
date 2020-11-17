@@ -6,8 +6,6 @@ module.exports = function (req, res, next) {
   const { cookies, product } = req;
   const accessToken = cookies.__act;
   const userId = jwt.decode(accessToken).id;
-  console.log(userId);
-  console.log(product.toJSON().user_id);
   if (userId !== product.toJSON().user_id) {
     res.status(401);
     return res.send("Access denied");
