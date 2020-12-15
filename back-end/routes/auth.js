@@ -5,6 +5,8 @@ const Token = require("../models/token");
 const { registerValidation, loginValidation } = require("../validation");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const verifyRole = require("../middleware/userRoleVerification");
+const verifyToken = require("../middleware/tokenVerification");
 
 /* POST - Register a new user. */
 router.post("/register", async (req, res) => {
@@ -20,7 +22,7 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     hashPassword = await bcrypt.hash(req.body.password, salt);
   } catch (err) {
-    res.json({
+    return res.json({
       statusCode: res.status(400).statusCode,
       msg: "Error with generating password hash",
       result: err,
@@ -47,7 +49,7 @@ router.post("/register", async (req, res) => {
       msg: "User successfully registered",
     });
   } catch (err) {
-    res.json({
+    return res.json({
       statusCode: res.status(400).statusCode,
       msg: "Error while registering new user",
       result: err,
@@ -67,7 +69,7 @@ router.post("/login", async (req, res) => {
     user = await new User().where("email", req.body.email).fetch();
     validUser = await bcrypt.compare(req.body.password, user.toJSON().password);
   } catch (err) {
-    res.json({
+    return res.json({
       statusCode: res.status(400).statusCode,
       msg: "Incorrect username or password",
     });
@@ -103,7 +105,7 @@ router.post("/login", async (req, res) => {
             msg: "Login successful",
           });
         } catch (err) {
-          res.json({
+          return res.json({
             statusCode: res.status(400).statusCode,
             msg: "Refresh token expired",
           });
@@ -132,14 +134,14 @@ router.post("/login", async (req, res) => {
             msg: "Login successful",
           });
         } catch (err) {
-          res.json({
+          return res.json({
             statusCode: res.status(400).statusCode,
             msg: "Could not create refresh token",
           });
         }
       }
     } catch {
-      res.json({
+      return res.json({
         statusCode: res.status(400).statusCode,
         msg: "Error while fetching refresh token",
       });
@@ -153,58 +155,85 @@ router.post("/login", async (req, res) => {
 });
 
 /* POST - Create a new access token */
-router.post("/access-token", async (req, res) => {
-  const refreshToken = req.body.token;
-  if (refreshToken == null) {
-    return res.json({
-      statusCode: res.status(401).statusCode,
-      msg: "No refresh token",
-    });
-  }
-  try {
-    await new Token().where("refresh_token", refreshToken).fetch();
-  } catch (err) {
-    res.json({
-      statusCode: res.status(403).statusCode,
-      msg: "Refresh token not found",
-    });
-  }
-  try {
-    const userId = jwt.decode(refreshToken).id;
-    const userObj = await new User().where("id", userId).fetch();
-    const userPassword = userObj.toJSON().password;
+router.post(
+  "/access-token",
+  verifyToken,
+  verifyRole("admin"),
+  async (req, res) => {
+    const refreshToken = req.body.token;
+    if (refreshToken == null) {
+      return res.json({
+        statusCode: res.status(401).statusCode,
+        msg: "No refresh token",
+      });
+    }
+    try {
+      await new Token().where("refresh_token", refreshToken).fetch();
+    } catch (err) {
+      return res.json({
+        statusCode: res.status(403).statusCode,
+        msg: "Refresh token not found",
+      });
+    }
+    try {
+      const userId = jwt.decode(refreshToken).id;
+      const userObj = await new User().where("id", userId).fetch();
+      const userPassword = userObj.toJSON().password;
 
-    const user = jwt.verify(
-      refreshToken,
-      process.env.REFRESH_TOKEN_SECRET + userPassword
-    );
-    const accessToken = generateAccessToken(user);
-    createCookie(res, accessToken, "__act", process.env.ACCESS_TOKEN_EXPIRES);
-    res.json({
-      statusCode: res.status(200).statusCode,
-      msg: "New access token generated",
-    });
-  } catch (err) {
-    res.json({
-      statusCode: res.status(403).statusCode,
-      msg: "Could not generate access token",
-      error: err,
-    });
+      const user = jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET + userPassword
+      );
+      const accessToken = generateAccessToken(user);
+      createCookie(res, accessToken, "__act", process.env.ACCESS_TOKEN_EXPIRES);
+      res.json({
+        statusCode: res.status(200).statusCode,
+        msg: "New access token generated",
+      });
+    } catch (err) {
+      return res.json({
+        statusCode: res.status(403).statusCode,
+        msg: "Could not generate access token",
+        error: err,
+      });
+    }
   }
-});
+);
 
 /* DELETE - Invalidate refresh token */
-router.delete("/invalidate", async (req, res) => {
+router.delete(
+  "/invalidate",
+  verifyToken,
+  verifyRole("admin"),
+  async (req, res) => {
+    try {
+      await new Token().where("refresh_token", req.body.token).destroy();
+      res.json({
+        statusCode: res.status(204).statusCode,
+        msg: "Refresh token invalidated",
+      });
+    } catch (err) {
+      res.json({
+        statusCode: res.status(400).statusCode,
+        msg: "Cannot invalidate token",
+      });
+    }
+  }
+);
+
+/* LOGOUT - Logout user */
+router.get("/logout", verifyToken, (req, res) => {
   try {
-    await new Token().where("refresh_token", req.body.token).destroy();
+    createCookie(res, "", "__act", Date.now());
+    createCookie(res, "", "__rft", Date.now());
     res.json({
-      statusCode: res.status(204).statusCode,
-      msg: "Refresh token invalidated",
+      statusCode: res.status(200).statusCode,
+      msg: "Cookies successfully cleared",
     });
   } catch (err) {
     res.json({
       statusCode: res.status(400).statusCode,
-      msg: "Cannot invalidate token",
+      msg: "Cannot clear cookies",
     });
   }
 });
