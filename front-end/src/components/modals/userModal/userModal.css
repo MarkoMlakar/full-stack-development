@@ -1,0 +1,159 @@
+.user-image {
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.close-image {
+  margin-top: 10px;
+  margin-right: 10px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.user-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  max-width: 600px;
+  max-height: 620px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: #ffffff;
+  border-radius: 3px;
+}
+
+.user-header {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: auto;
+}
+
+.user-header-name {
+  margin-left: 30px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.user-name-title {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 25px;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #334144;
+}
+
+.user-sightings-title {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 13px;
+  /* identical to box height, or 100% */
+
+  color: #949ea0;
+}
+
+.user-info {
+  margin-top: 41px;
+}
+
+.user-info-container {
+  margin-left: 110px;
+  margin-top: 16px;
+}
+
+.user-info-row {
+  margin-top: 30px;
+}
+
+.user-row-title {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 10px;
+  /* identical to box height, or 100% */
+
+  color: #949ea0;
+}
+
+.user-row-value {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 16px;
+
+  color: #334144;
+  margin-top: 16px;
+}
+
+.logout-button {
+  width: 150px;
+  height: 50px;
+  background: linear-gradient(270deg, #476270 0%, #8fa7b3 100%);
+  box-shadow: 0px 15px 20px rgba(234, 168, 159, 0.2);
+  border-radius: 3px;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.logout-label {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.close-btn {
+  text-align: right;
+}
+
+.user-logout {
+  text-align: center;
+  margin-top: 71px;
+  margin-bottom: 59px;
+}
+@media screen and (max-width: 450px) {
+  .overlay {
+    background-color: rgb(255, 255, 255);
+    margin-top: 80px;
+  }
+  .close-text {
+    color: #334144;
+  }
+  .close-btn {
+    display: none;
+  }
+  .user-info-container {
+    margin-left: 38px;
+  }
+  .user-header {
+    margin-top: 67px;
+  }
+}

@@ -1,0 +1,60 @@
+.field-container {
+  background: #f5f6f7;
+  border: 1px solid #dfe5ea;
+  box-sizing: border-box;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  max-height: 50px;
+  padding-right: 18px;
+}
+
+.label {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 10px;
+  color: #949ea0;
+  margin-top: 11px;
+  margin-left: 15px;
+}
+
+.label-error {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 10px;
+  color: red;
+  margin-top: 11px;
+  margin-left: 15px;
+}
+.form-input {
+  width: 100%;
+  margin-bottom: 11px;
+  margin-top: 5px;
+  background: #f5f6f7;
+  border: none;
+  outline: none;
+  height: 15px;
+  min-width: 150px;
+  box-sizing: border-box;
+}
+
+.form-input,
+textarea {
+  color: #334144;
+  margin-left: 15px;
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 13px;
+}
+
+@media screen and (max-width: 400px) {
+  .form-input {
+    min-width: 150px;
+  }
+}

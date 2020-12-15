@@ -1,0 +1,11 @@
+.favorites-container {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  text-align: center;
+}
+.favorites-title {
+  font-family: Ubuntu;
+  color: #949ea0;
+}

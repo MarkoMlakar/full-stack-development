@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div
+      id="modal"
+    >
+      <div
+        class="overlay"
+      />
+      <div
+        class="modal-container"
+      >
+        <div
+          class="user-modal"
+        >
+          <div
+            class="close-btn"
+          >
+            <img
+              alt="Close"
+              class="close-image"
+              src="close-icon.svg"
+            />
+          </div>
+          <div
+            class="user-info-container"
+          >
+            <div
+              class="user-header"
+            >
+              <img
+                alt="User"
+                class="user-image"
+                src="profile-image.png"
+              />
+              <div
+                class="user-header-name"
+              >
+                <div
+                  class="user-name-title"
+                >
+                  Marko
+                   
+                  Mlakar
+                </div>
+                <div
+                  class="user-sightings-title"
+                  data-testid="sightings"
+                >
+                  12
+                   sightings
+                </div>
+              </div>
+            </div>
+            <div
+              class="user-info"
+            >
+              <div
+                class="user-info-row"
+              >
+                <div
+                  class="user-row-title"
+                >
+                  First Name
+                </div>
+                <div
+                  class="user-row-value"
+                  data-testid="first-name"
+                >
+                  Marko
+                </div>
+              </div>
+              <div
+                class="user-info-row"
+              >
+                <div
+                  class="user-row-title"
+                >
+                  Last Name
+                </div>
+                <div
+                  class="user-row-value"
+                  data-testid="last-name"
+                >
+                  Mlakar
+                </div>
+              </div>
+              <div
+                class="user-info-row"
+              >
+                <div
+                  class="user-row-title"
+                >
+                  Date of Birth
+                </div>
+                <div
+                  class="user-row-value"
+                  data-testid="dob"
+                >
+                  April 3, 1996
+                </div>
+              </div>
+              <div
+                class="user-info-row"
+              >
+                <div
+                  class="user-row-title"
+                >
+                  Email
+                </div>
+                <div
+                  class="user-row-value"
+                  data-testid="email"
+                >
+                  markomlakar2@gmail.com
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="user-logout"
+          >
+            <button
+              class="logout-button"
+            >
+              <div
+                class="logout-label"
+              >
+                Logout
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <modal />
+    <div />
+  </body>,
+  "container": <div />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

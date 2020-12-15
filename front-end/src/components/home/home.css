@@ -1,0 +1,110 @@
+.home {
+  text-align: center;
+  color: white;
+  position: absolute;
+  left: 0;
+  min-width: 100%;
+  width: 100%;
+  height: auto;
+  top: 80px;
+  z-index: -1;
+}
+
+.home-image {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.top-section {
+  height: 500px;
+  width: 100%;
+  position: relative;
+  background: url("../../assets/images/home-wallpaper.jpg") center center/cover
+    no-repeat;
+  display: flex;
+}
+
+.headline {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #ffffff;
+  min-width: 700px;
+}
+
+.subtitle {
+  margin-top: 15px;
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 17px;
+  text-align: center;
+  color: #ffffff;
+  mix-blend-mode: normal;
+  opacity: 0.7;
+}
+
+.bottom-section {
+  height: 100vh;
+}
+.home-spinner {
+  margin-top: 10%;
+}
+@media screen and (max-width: 780px) {
+  .headline {
+    font-family: Ubuntu;
+    font-weight: 300;
+    min-width: 550px;
+  }
+  .subtitle {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 17px;
+    text-align: center;
+
+    color: #ffffff;
+
+    mix-blend-mode: normal;
+    opacity: 0.7;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .headline {
+    min-width: 510px;
+  }
+  .subtitle {
+    min-width: 400px;
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .headline {
+    min-width: 200px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .headline {
+    width: 100%;
+  }
+  .subtitle {
+    min-width: 50px;
+  }
+  .input-field {
+    font-size: 12px;
+  }
+}

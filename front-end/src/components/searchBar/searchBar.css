@@ -1,0 +1,33 @@
+.search-bar {
+  margin-top: 45px;
+  background: #ffffff;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.input-field {
+  position: relative;
+  flex: 1;
+  height: 20px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  font-family: "Ubuntu", sans-serif;
+  color: #949ea0;
+}
+.search-icon {
+  filter: grayscale(100%);
+}
+@media screen and (max-width: 700px) {
+  .input-field {
+    font-family: Ubuntu;
+    font-weight: 300;
+    font-size: 14px;
+  }
+}
