@@ -18,8 +18,9 @@ router.get("/", verifyToken, verifyRole("admin"), async (req, res) => {
 });
 
 // /* GET - Get User by ID. */
-router.get("/:id", verifyToken, verifyRole("admin"), async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
+    // TODO: Add access token to database so the user can only view personal info
     let user = await new User().where("id", req.params.id).fetch();
     res.json(user);
   } catch (err) {

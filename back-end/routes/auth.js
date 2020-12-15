@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
-  let validUser, user;
+  let validUser, user, accessToken;
   try {
     user = await new User().where("email", req.body.email).fetch();
     validUser = await bcrypt.compare(req.body.password, user.toJSON().password);
@@ -75,8 +75,9 @@ router.post("/login", async (req, res) => {
     });
   }
   if (validUser) {
-    const accessToken = generateAccessToken(user);
+    accessToken = generateAccessToken(user);
     createCookie(res, accessToken, "__act", process.env.ACT_COOKIE_EXPIRES);
+    createCookie(res, user.toJSON().id, "__id", process.env.ACT_COOKIE_EXPIRES);
 
     /* Check for existing refresh token */
     try {
@@ -101,6 +102,8 @@ router.post("/login", async (req, res) => {
             process.env.RFT_COOKIE_EXPIRES
           );
           res.json({
+            __act: accessToken,
+            __id: user.toJSON().id,
             statusCode: res.status(200).statusCode,
             msg: "Login successful",
           });
@@ -131,6 +134,8 @@ router.post("/login", async (req, res) => {
           });
           res.json({
             statusCode: res.status(200).statusCode,
+            __act: accessToken,
+            __id: user.toJSON().id,
             msg: "Login successful",
           });
         } catch (err) {
@@ -222,7 +227,8 @@ router.delete(
 );
 
 /* LOGOUT - Logout user */
-router.get("/logout", verifyToken, (req, res) => {
+// TODO: ADD verifyToken flag once the
+router.get("/logout", (req, res) => {
   try {
     createCookie(res, "", "__act", Date.now());
     createCookie(res, "", "__rft", Date.now());
